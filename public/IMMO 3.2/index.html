@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>IMMO 3.2</title>
+        <script type="text/javascript" src="jquery-3.4.1.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="jsdesktop.js"></script>
+        <link rel="stylesheet" type="text/css" href="yaock1-style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <script src="java1.js"></script>
+        <script src="jquery-ui.min.js"></script>
+        <link type="text/css" href="jquery-ui.min.css" rel="stylesheet">
+    </head>
+    <body class="body" style="font-size: 0px;">
+        <div class="bgdarken"></div>
+        
+        <div class="page">
+            <div id="main" class= "main">
+            <p id="Welcome" class="welcome"><script>document.write(time(h)+name)</script></p>      
+                <input id="search-text" type="text" class="search-text" placeholder="请输入关键字" oninput="textchange();" onkeydown="getkey();" autofocus="autofocus" onmousemove="onsearchtext();" onmouseleave="leavesearchtext();" autocomplete="off">
+                <!--input type="submit" value="GO" name="wd" class="search-button"s-->
+          
+                <button type="submit" class="grandsearch" id="grandsearch" onclick="grandsearch();">NODE</button>
+            
+            <div class="search-purpose">
+                <form id="search-purpose" target="_blank">
+                    <input id="search-text-no" type="hidden">
+                    <button id="selectionOne" type="submit" class="selection" style="margin-left:0px;" onclick="pp1();">Baidu</button>
+                    <button id="selectionTwo" type="submit" class="selection" onclick="pp2();">Google</button>
+                    <button id="selectionThree" type="submit" class="selection" onclick="pp3();">Zhihu</button>
+                    <button id="selectionFour" type="submit" class="selection" onclick="pp4();">Youtube</button>
+                </form>
+                
+            </div>
+
+            </div>
+        </div>  
+
+
+
+
+        <div id="page2" class="page2" style="display:none">
+
+            <div id="header2" class="header2">
+                <button id="back" class="back" onclick="back_click();"></button>
+                <input type="text" id="search-text2" class="search-text2" oninput="textchange2();" onkeydown="getkey2();" autocomplete="off"></input>
+            </div>
+
+            <div id="main2" class="main2">
+                <table class="table" cellpadding="0" cellspacing="0">
+                <tr style="border-style:none;">
+                    <td class="slot"><iframe id="card1" frameborder="0" scrolling="auto"></iframe></td>
+                    <td class="slot"><iframe id="card2" frameborder="0" scrolling="auto"></iframe></td>
+                    <td class="slot"><iframe id="card3" frameborder="0" scrolling="auto"></iframe></td>
+
+                </tr>
+                </table>
+            </div>
+        
+        </div>
+    </body>
+</html>
