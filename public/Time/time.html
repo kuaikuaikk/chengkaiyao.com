@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TIME</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script>
+        /*function readtime() {
+            var reader = new FileReader();
+            reader.readAsBinaryString("http://worldtimeapi.org/api/ip/73.40.6.99.txt");
+            alert(reader.result);
+        }*/
+        var ip;
+        var request = new XMLHttpRequest();
+        var city;
+        var state;
+        var time;
+        var date;
+
+        request.open("GET", "https://api.ipify.org?format=json");
+        request.onreadystatechange = function () {
+            ip = request.responseText.split("\"")[3];
+            //console.log(ip);
+        }
+        request.send(null);
+
+
+
+        function getTime() {
+            var oReq = new XMLHttpRequest();
+            //oReq.addEventListener("load", reqListener);
+            oReq.open("GET", "http://worldtimeapi.org/api/ip/" + ip + ".txt", true);
+
+            oReq.onreadystatechange = function () {
+                if (oReq.readyState === 4) {
+                    if (oReq.status === 200 || oReq.status == 0) {
+                        var data = oReq.responseText;
+                        var lines = data.split("\n");
+                        time = lines[2].substring(21, 26);
+                        date = lines[2].substring(15, 17) + "." + lines[2].substring(18, 20);
+
+                        //console.log(time);
+
+                        //document.getElementById("location")
+                    }
+                }
+            }
+            oReq.send(null);
+        }
+
+        function getCity() {
+            var request = new XMLHttpRequest();
+            request.open("GET", "http://api.ipstack.com/" + ip + "?access_key=5f271f3d37a1005e0ad8a7cc2fa26da2");
+            request.onreadystatechange = function () {
+
+                city = request.responseText.split(",")[8].split("\"")[3];
+                state = request.responseText.split(",")[7].split("\"")[3];
+                console.log(city);
+                console.log(state);
+
+            }
+            request.send(null);
+
+        }
+
+        function update() {
+            getTime();
+            document.getElementById("clock").innerHTML = time;
+            document.getElementById("location").innerHTML = date + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + city;
+        }
+        setTimeout("getCity()", 300);
+        setTimeout("getTime()", 300);
+        setTimeout("update()", 1000);
+        setInterval("update()", 10000);
+    </script>
+    <style type="text/css">
+        #clock {
+            position: absolute;
+            font-size: 200px;
+            font-weight: bolder;
+            text-align: center;
+        }
+
+        #location {
+            position: absolute;
+            font-size: 40px;
+            font-weight: normal;
+            text-align: center;
+            color: #8a8989;
+        }
+
+        #date {
+            position: absolute;
+            font-size: 40px;
+            font-weight: normal;
+            /*text-align: center;*/
+        }
+    </style>
+</head>
+
+<body style="font-family: 'Roboto', sans-serif;">
+
+    <div id="clock"></div>
+    <div id="location"></div>
+    <script>
+        var clientHeight = document.documentElement.clientHeight;
+        var clientWidth = document.documentElement.clientWidth;
+        var clock = document.getElementById("clock");
+        clock.style.height = "200px";
+        clock.style.width = "600px";
+        clock.style.lineHeight = clock.style.height;
+        clock.style.top = ((clientHeight - clock.style.height.split("px")[0]) / 2) - 50 + "px";
+        clock.style.left = ((clientWidth - clock.style.width.split("px")[0]) / 2) + "px";
+
+        var loc = document.getElementById("location");
+        loc.style.height = "40px";
+        loc.style.width = "600px";
+        loc.style.lineHeight = loc.style.height;
+        loc.style.top = ((clientHeight - loc.style.height.split("px")[0]) / 2) + 130 + "px";
+        loc.style.left = ((clientWidth - loc.style.width.split("px")[0]) / 2) + "px";
+    </script>
+
+
+</body>
+
+</html>
