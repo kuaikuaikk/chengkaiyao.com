@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Boring Flower</title>
+        
+    </head>
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
+        <script>
+            const socket = io.connect();
+            console.log(socket.on('flower', (flower) => {
+                const flowerElm = document.getElementById('flower');
+                flowerElm.src = `data:flower/jpg;base64,${flower}`;
+            }));
+        </script>
+        <center><img id="flower"></center>
+    </body>
+</html>
